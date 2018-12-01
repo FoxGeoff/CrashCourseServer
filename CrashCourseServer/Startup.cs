@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CrashCoreServer;
+﻿using CrashCoreServer;
+using CrashCourseServer.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace CrashCourseServer
 {
@@ -30,6 +25,25 @@ namespace CrashCourseServer
             services.AddTransient<DataSeeder>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            /* Configure CORS so the API allows requests from JavaScript.  
+               For demo purposes, all origins/headers/methods are allowed.  */
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOriginsHeadersAndMethods",
+                    builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
+
+            /* Alternative: for connection string from config.json (not a sercure configuraion)
+               services.AddDbContext<ProductImageDbContext>(options =>
+               options.UseMySql(_config.GetConnectionString("dbconnect")));
+               services.AddDbContext<AudioDbContext>(options =>
+               options.UseMySql(_dbconnect)); */
+
+            // Added: Services (such as BloggingContext) are registered with dependency injection during application startup.  
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=CrashCourse.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<EntryDbContext>
+                (options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
