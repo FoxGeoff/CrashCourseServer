@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CrashCourseServer.Migrations
 {
     [DbContext(typeof(EntryDbContext))]
-    [Migration("20181201023450_InitialCreate")]
+    [Migration("20181204004604_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,7 @@ namespace CrashCourseServer.Migrations
 
                     b.Property<double>("bodyFat");
 
-                    b.Property<DateTime>("date");
+                    b.Property<DateTime?>("date");
 
                     b.Property<int>("weight");
 

@@ -1,4 +1,4 @@
-﻿using CrashCoreServer;
+﻿using CrashCouresServer;
 using CrashCourseServer.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,7 +41,7 @@ namespace CrashCourseServer
                options.UseMySql(_dbconnect)); */
 
             // Added: Services (such as BloggingContext) are registered with dependency injection during application startup.  
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=CrashCourse.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=CrashCourseDb;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<EntryDbContext>
                 (options => options.UseSqlServer(connection));
         }
@@ -52,6 +52,7 @@ namespace CrashCourseServer
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                DataSeeder.InitializeData(app.ApplicationServices);
             }
             else
             {

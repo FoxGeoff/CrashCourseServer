@@ -25,7 +25,7 @@ namespace CrashCourseServer.Migrations
 
                     b.Property<double>("bodyFat");
 
-                    b.Property<DateTime>("date");
+                    b.Property<DateTime?>("date");
 
                     b.Property<int>("weight");
 

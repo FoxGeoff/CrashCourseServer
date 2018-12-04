@@ -12,7 +12,7 @@ namespace CrashCourseServer.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false),
-                    date = table.Column<DateTime>(nullable: false),
+                    date = table.Column<DateTime>(nullable: true),
                     weight = table.Column<int>(nullable: false),
                     bodyFat = table.Column<double>(nullable: false)
                 },
