@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CrashCourseServer.Migrations
 {
     [DbContext(typeof(EntryDbContext))]
-    [Migration("20181204004604_InitialCreate")]
+    [Migration("20181205002631_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
