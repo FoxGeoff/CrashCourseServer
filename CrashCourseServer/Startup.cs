@@ -28,6 +28,8 @@ namespace CrashCourseServer
 
             /* Configure CORS so the API allows requests from JavaScript.  
                For demo purposes, all origins/headers/methods are allowed.  */
+
+            // Shows UseCors with CorsPolicyBuilder.
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOriginsHeadersAndMethods",
@@ -58,6 +60,9 @@ namespace CrashCourseServer
             {
                 app.UseHsts();
             }
+
+            // Shows UseCors with named policy.
+            app.UseCors("AllowAllOriginsHeadersAndMethods");
 
             app.UseHttpsRedirection();
             app.UseMvc();

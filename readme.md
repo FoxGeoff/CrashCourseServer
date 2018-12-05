@@ -12,3 +12,27 @@ Update-Database
 ```
 **If you get an error stating The term 'add-migration'** 
 ** is not recognized as the name of a cmdlet, close and reopen Visual Studio.**
+
+## CORS is using policies:
+
+```
+// Shows UseCors with CorsPolicyBuilder.
+services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOriginsHeadersAndMethods",
+        builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+});
+```
+* Using named policy:-
+```
+ // Shows UseCors with named policy.
+ app.UseCors("AllowAllOriginsHeadersAndMethods");
+```
+* Using controller decorators:-
+```
+[Route("api/[controller]")]
+[EnableCors("AllowAllOriginsHeadersAndMethods")]
+public class ValuesController : ControllerBase
+```
+
+
